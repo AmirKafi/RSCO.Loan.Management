@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\common.props"></Import>
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+    <AssemblyName>RSCO.LoanManagement.Application</AssemblyName>
+    <PackageId>RSCO.LoanManagement.Application</PackageId>
+    <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
+    <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <RootNamespace>RSCO.LoanManagement</RootNamespace>
+    <GenerateDocumentationFile>False</GenerateDocumentationFile>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="MiniExcel" Version="1.34.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RSCO.LoanManagement.Application.Shared\RSCO.LoanManagement.Application.Shared.csproj" />
+    <ProjectReference Include="..\RSCO.LoanManagement.Core\RSCO.LoanManagement.Core.csproj" />
+    <ProjectReference Include="..\RSCO.LoanManagement.EntityFrameworkCore\RSCO.LoanManagement.EntityFrameworkCore.csproj" />
+  </ItemGroup>
+</Project>

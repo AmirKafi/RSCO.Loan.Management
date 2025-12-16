@@ -1,0 +1,74 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+
+    <PreserveCompilationContext>true</PreserveCompilationContext>
+    <AssemblyName>RSCO.LoanManagement.Web.Mvc</AssemblyName>
+    <OutputType>Exe</OutputType>
+    <PackageId>RSCO.LoanManagement.Web.Mvc</PackageId>
+    <UserSecretsId>RSCO-LoanManagement-894FDFC1-6482-4A56-926A-3C46C9FE0329</UserSecretsId>
+    <RootNamespace>RSCO.LoanManagement.Web</RootNamespace>
+
+    <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+    <TypeScriptToolsVersion>4.3</TypeScriptToolsVersion>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <!-- App_Data cleanup -->
+  <ItemGroup>
+    <Compile Remove="App_Data\**" />
+    <Content Remove="App_Data\**" />
+    <EmbeddedResource Remove="App_Data\**" />
+    <None Remove="App_Data\**" />
+  </ItemGroup>
+
+  <!-- Swagger override -->
+  <ItemGroup>
+    <Content Remove="wwwroot\swagger\ui\index.html" />
+    <EmbeddedResource Include="wwwroot\swagger\ui\index.html" />
+  </ItemGroup>
+
+  <!-- Static & config files -->
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="wwwroot\Plugins\.gitkeep" />
+
+    <None Update="Dockerfile">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+
+    <None Update="log4net.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+
+    <None Update="wwwroot\**\*;Areas\**\*;Views\**\*">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+  </ItemGroup>
+
+  <!-- Project reference -->
+  <ItemGroup>
+    <ProjectReference Include="..\RSCO.LoanManagement.Web.Core\RSCO.LoanManagement.Web.Core.csproj" />
+  </ItemGroup>
+
+  <!-- Packages (NET 9 aligned) -->
+  <ItemGroup>
+    <PackageReference Include="Abp.Castle.Log4Net" Version="9.3.0" />
+
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Twitter" Version="9.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="9.0.0" />
+
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
+  </ItemGroup>
+
+</Project>
