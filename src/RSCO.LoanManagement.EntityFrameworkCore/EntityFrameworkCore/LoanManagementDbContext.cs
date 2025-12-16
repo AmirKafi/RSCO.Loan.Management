@@ -17,6 +17,7 @@ using RSCO.LoanManagement.Friendships;
 using RSCO.LoanManagement.MultiTenancy;
 using RSCO.LoanManagement.MultiTenancy.Accounting;
 using RSCO.LoanManagement.MultiTenancy.Payments;
+using RSCO.LoanManagement.People;
 using RSCO.LoanManagement.Storage;
 
 namespace RSCO.LoanManagement.EntityFrameworkCore
@@ -50,6 +51,7 @@ namespace RSCO.LoanManagement.EntityFrameworkCore
         public virtual DbSet<UserDelegation> UserDelegations { get; set; }
 
         public virtual DbSet<RecentPassword> RecentPasswords { get; set; }
+        public virtual DbSet<Person> People { get; set; }
 
         public LoanManagementDbContext(DbContextOptions<LoanManagementDbContext> options)
             : base(options)

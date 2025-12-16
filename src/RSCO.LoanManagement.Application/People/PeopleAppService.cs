@@ -19,7 +19,7 @@ using RSCO.LoanManagement.Storage;
 namespace RSCO.LoanManagement.People
 {
     [AbpAuthorize(AppPermissions.Pages_People)]
-    public class PeopleAppService : RSCO.LoanManagementAppServiceBase, IPeopleAppService
+    public class PeopleAppService : LoanManagementAppServiceBase, IPeopleAppService
     {
         private readonly IRepository<Person, Guid> _personRepository;
         private readonly IPeopleExcelExporter _peopleExcelExporter;
