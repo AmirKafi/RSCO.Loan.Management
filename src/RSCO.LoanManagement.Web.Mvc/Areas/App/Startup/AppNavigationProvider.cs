@@ -21,6 +21,22 @@ namespace RSCO.LoanManagement.Web.Areas.App.Startup
                         icon: "flaticon-line-graph",
                         permissionDependency: new SimplePermissionDependency(AppPermissions.Pages_Administration_Host_Dashboard)
                     )
+                )
+                .AddItem(new MenuItemDefinition(
+                        AppPageNames.Host.LoanContracts,
+                        L("LoanContracts"),
+                        url: "App/LoanContracts",
+                        icon: "flaticon-more",
+                        permissionDependency: new SimplePermissionDependency(AppPermissions.Pages_LoanContracts)
+                    )
+                )
+                .AddItem(new MenuItemDefinition(
+                        AppPageNames.Common.People,
+                        L("People"),
+                        url: "App/People",
+                        icon: "flaticon-more",
+                        permissionDependency: new SimplePermissionDependency(AppPermissions.Pages_People)
+                    )
                 ).AddItem(new MenuItemDefinition(
                         AppPageNames.Host.Tenants,
                         L("Tenants"),
@@ -173,7 +189,12 @@ namespace RSCO.LoanManagement.Web.Areas.App.Startup
                         icon: "flaticon-shapes",
                         permissionDependency: new SimplePermissionDependency(AppPermissions.Pages_DemoUiComponents)
                     )
-                );
+                ).AddItem(new MenuItemDefinition(
+                    AppPageNames.Loan.People,
+                    L("People"),
+                    url: "App/People",
+                    icon: "flaticon-shapes",
+                    permissionDependency: new SimplePermissionDependency(AppPermissions.Pages_People)));
         }
 
         private static ILocalizableString L(string name)

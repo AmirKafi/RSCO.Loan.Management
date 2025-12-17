@@ -1,0 +1,41 @@
+﻿@using RSCO.LoanManagement.Web.Areas.App.Startup
+@using RSCO.LoanManagement.Web.Areas.App.Models.People
+@model PersonViewModel
+@using RSCO.LoanManagement.Web.TagHelpers
+@{
+ViewBag.CurrentPageName = AppPageNames.Common.People;
+}
+@section Scripts
+{
+<script abp-src="/view-resources/Areas/App/Views/People/CreateOrEdit.js" asp-append-version="true"></script>
+}
+
+@{
+var breadcrumbs = new List<BreadcrumbItem>()
+    {
+    new BreadcrumbItem("/App/People", L("People")),
+    new BreadcrumbItem(L("Details")),
+    };
+    }
+    <abp-page-subheader title='@L("Details")' breadcrumbs="breadcrumbs">
+    </abp-page-subheader>
+
+    <div class="@(await GetContainerClass())">
+        <div class=" card card-custom gutter-b">
+            <div class=" card-body">
+                <div id="PersonInformationsTab">
+                    <div class="row">
+                        <div class="col-6 mb-3">
+                            <h6>@L("FirstName") :</h6>
+                            @Model.Person.FirstName
+                        </div>
+                        <div class="col-6 mb-3">
+                            <h6>@L("LastName") :</h6>
+                            @Model.Person.LastName
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

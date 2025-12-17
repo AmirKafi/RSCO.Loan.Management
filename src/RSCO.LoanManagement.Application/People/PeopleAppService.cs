@@ -115,6 +115,7 @@ namespace RSCO.LoanManagement.People
         protected virtual async Task Create(CreateOrEditPersonDto input)
         {
             var person = ObjectMapper.Map<Person>(input);
+
             await _personRepository.InsertAsync(person);
 
         }

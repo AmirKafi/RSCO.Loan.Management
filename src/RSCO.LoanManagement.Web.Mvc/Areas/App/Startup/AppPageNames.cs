@@ -4,6 +4,7 @@
     {
         public static class Common
         {
+            public const string People = "People.People";
             public const string Administration = "Administration";
             public const string Roles = "Administration.Roles";
             public const string Users = "Administration.Users";
@@ -20,8 +21,14 @@
             public const string Notifications_MassNotifications = "Administration.Notifications.MassNotifications";
         }
 
+        public static class Loan
+        {
+            public const string People = "Loan.People";
+        }
+
         public static class Host
         {
+            public const string LoanContracts = "LoanContracts.LoanContracts";
             public const string Tenants = "Tenants";
             public const string Editions = "Editions";
             public const string Maintenance = "Administration.Maintenance";

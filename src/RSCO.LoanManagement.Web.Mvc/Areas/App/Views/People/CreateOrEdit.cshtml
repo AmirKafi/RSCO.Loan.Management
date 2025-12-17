@@ -1,0 +1,64 @@
+﻿
+@using System.Globalization
+@using RSCO.LoanManagement.Authorization
+@using RSCO.LoanManagement.Web.Areas.App.Models.People
+@using RSCO.LoanManagement.Web.Areas.App.Startup
+@model CreateOrEditPersonViewModel
+@using Abp.Extensions
+@using RSCO.LoanManagement.Web.TagHelpers
+@{
+ViewBag.CurrentPageName = AppPageNames.Common.People;
+}
+@section Scripts
+{
+<script abp-src="/view-resources/Areas/App/Views/People/CreateOrEdit.js" asp-append-version="true"></script>
+}
+
+@{
+var breadcrumbs = new List<BreadcrumbItem>()
+    {
+    new BreadcrumbItem("/App/People", L("People")),
+    new BreadcrumbItem(Model.IsEditMode ? L("Edit") : L("Create"))
+    };
+    }
+    <abp-page-subheader title='@(Model.IsEditMode ? (L("EditPerson")) : L("CreateNewPerson"))' breadcrumbs="breadcrumbs">
+    </abp-page-subheader>
+
+    <div class="@(await GetContainerClass())">
+        <div class="card card-custom gutter-b">
+            <form name="PersonInformationsForm" role="form" novalidate class="form-validation">
+                <div class="card-body">
+                    <div class="form">
+                        <div id="PersonInformationsTab">
+                            @if (Model.IsEditMode)
+                            {
+                            <input type="hidden" name="id" value="@Model.Person.Id" />
+                            }
+
+                            <div class="my-3">
+                                <label class="form-label" for="Person_FirstName">@L("FirstName")</label>
+                                <input class="form-control" id="Person_FirstName" value="@Model.Person.FirstName" type="text" name="firstName" required maxlength="@RSCO.LoanManagement.People.PersonConsts.MaxFirstNameLength" minlength="@RSCO.LoanManagement.People.PersonConsts.MinFirstNameLength" />
+                            </div>
+
+                            <div class="my-3">
+                                <label class="form-label" for="Person_LastName">@L("LastName")</label>
+                                <input class="form-control" id="Person_LastName" value="@Model.Person.LastName" type="text" name="lastName" required maxlength="@RSCO.LoanManagement.People.PersonConsts.MaxLastNameLength" minlength="@RSCO.LoanManagement.People.PersonConsts.MinLastNameLength" />
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="row align-items-center">
+                        <div class="col-lg-12">
+                            <button type="button" id="saveBtn" class="btn btn-success float-right"><i class="fa fa-save"></i> @L("Save")</button>
+                            @if (!Model.IsEditMode)
+                            {
+                            <button type="button" id="saveAndNewBtn" class="btn btn-success float-right"><i class="fa fa-save"></i> @L("SaveAndNew")</button>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
