@@ -1136,7 +1136,8 @@
     <text name="EditDynamicPropertyValue">Edit Dynamic Property Value</text>
     <text name="EditValues">Edit Values</text>
     <text name="FullName">Full Name</text>
-    <text name="FirstName">First Name</text>
+	  <text name="FirstName">First Name</text>
+	  <text name="LastName">Last Name</text>
     <text name="UiCustomization_HoverableAside">Expand menu when hovered</text>
     <text name="SMTPSettingsNotProvidedWarningText">SMTP settings not provided, Please provided SMTP settings.</text>
     <text name="SocialLoginDeactivate_Description">This external login option will be disabled for your tenant.</text>
@@ -1312,6 +1313,10 @@
     <text name="SameEditionChangeErrorMessage">Please select a different edition than the one already chosen.</text>
     <text name="RestrictedEmailDomain_NullError">When email domain restriction is active, the email domain field cannot be empty. Please enter a valid domain address (e.g., "yourdomain.com").</text>
     <text name="RestrictedEmailDomain_InvalidError">For email restrictions, only the domain part should be entered; full email addresses are not accepted. (e.g., "yourdomain.com")</text>
-    <text name="RestrictedEmailDomain_InputError">Invalid email domain.</text>
+	  <text name="RestrictedEmailDomain_InputError">Invalid email domain.</text>
+	  <text name="People">People</text>
+	  <text name="PeopleHeaderInfo">Creating People to be used in Loan Contracts</text>
+	  <text name="CreateNewPerson">Create New Person</text>
+	  
   </texts>
 </localizationDictionary>
