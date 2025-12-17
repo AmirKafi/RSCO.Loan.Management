@@ -69,7 +69,10 @@ namespace RSCO.LoanManagement.Web.Areas.App.Controllers
 
             var model = new LoanContractViewModel()
             {
-                LoanContract = getLoanContractForViewDto.LoanContract
+                LoanContract = getLoanContractForViewDto.LoanContract,
+                BorrowerName = getLoanContractForViewDto.BorrowerName,
+                GuarantorNames = getLoanContractForViewDto.GuarantorNames
+                
             };
 
             return PartialView("_ViewLoanContractModal", model);

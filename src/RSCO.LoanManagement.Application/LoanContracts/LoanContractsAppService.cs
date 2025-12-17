@@ -16,6 +16,7 @@ using Microsoft.EntityFrameworkCore;
 using Abp.UI;
 using RSCO.LoanManagement.Storage;
 using RSCO.LoanManagement.LoanContractPersons;
+using Castle.Core.Logging;
 
 namespace RSCO.LoanManagement.LoanContracts
 {
@@ -24,12 +25,14 @@ namespace RSCO.LoanManagement.LoanContracts
     {
         private readonly IRepository<LoanContract, Guid> _loanContractRepository;
         private readonly ILoanContractsExcelExporter _loanContractsExcelExporter;
+        public ILogger Logger { get; set; }
+
 
         public LoanContractsAppService(IRepository<LoanContract, Guid> loanContractRepository, ILoanContractsExcelExporter loanContractsExcelExporter)
         {
             _loanContractRepository = loanContractRepository;
             _loanContractsExcelExporter = loanContractsExcelExporter;
-
+            Logger = NullLogger.Instance;
         }
 
         public virtual async Task<PagedResultDto<GetLoanContractForViewDto>> GetAll(GetAllLoanContractsInput input)
@@ -74,6 +77,10 @@ namespace RSCO.LoanManagement.LoanContracts
                 {
                     res.BorrowerName = borrower.Person.FirstName + " " + borrower.Person.LastName;
                 }
+                else
+                {
+                    res.BorrowerName = "";
+                }
 
                 var guarantors = o.Persons
                     .Where(p => p.Role == LoanContractPersonRole.Guarantor && p.Person != null)
@@ -81,7 +88,6 @@ namespace RSCO.LoanManagement.LoanContracts
                     .ToList();
                 
                 res.GuarantorNames = string.Join(", ", guarantors);
-
                 results.Add(res);
             }
 
@@ -107,6 +113,10 @@ namespace RSCO.LoanManagement.LoanContracts
                 if (borrower?.Person != null)
                 {
                     output.BorrowerName = borrower.Person.FirstName + " " + borrower.Person.LastName;
+                }
+                else
+                {
+                    output.BorrowerName = "";
                 }
 
                 var guarantors = loanContract.Persons

@@ -1,5 +1,6 @@
 (function () {
     $(function () {
+        $.fn.dataTable.ext.errMode = 'none';
 
         var _$loanContractsTable = $('#LoanContractsTable');
         var _loanContractsService = abp.services.app.loanContracts;
@@ -169,6 +170,8 @@
                         targets: 5,
                         data: null,
                         name: "borrowerName",
+                        orderable: false,
+                        responsivePriority: 1,
                         render: function (data, type, row) {
                             return row && row.borrowerName ? row.borrowerName : "";
                         },
@@ -178,6 +181,8 @@
                         targets: 6,
                         data: null,
                         name: "guarantorNames",
+                        orderable: false,
+                        responsivePriority: 2,
                         render: function (data, type, row) {
                             return row && row.guarantorNames ? row.guarantorNames : "";
                         },
