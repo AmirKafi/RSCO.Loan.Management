@@ -32,8 +32,7 @@ namespace RSCO.LoanManagement.Tests.People
             {
                 FirstName = "Test value",
                 LastName = "Test value",
-                Id = _personTestId,
-                TenantId = currentTenant.Id
+                Id = _personTestId
             };
 
             UsingDbContext(context =>

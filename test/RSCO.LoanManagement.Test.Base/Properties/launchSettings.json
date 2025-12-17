@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "RSCO.LoanManagement.Test.Base": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:52306;http://localhost:52307"
+    }
+  }
+}
