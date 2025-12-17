@@ -1,0 +1,58 @@
+
+@using System.Globalization
+@using RSCO.LoanManagement.Web.Areas.App.Models.Common.Modals
+@using RSCO.LoanManagement.Web.Areas.App.Models.LoanContracts
+@model CreateOrEditLoanContractModalViewModel
+@using Abp.Extensions
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditLoanContract")) : L("CreateNewLoanContract")))
+
+<div class="modal-body">
+    <div id="LoanContractInformationsTab">
+        <form name="LoanContractInformationsForm" role="form" novalidate class="form-validation">
+
+            @if (Model.IsEditMode)
+            {
+            <input type="hidden" name="id" value="@Model.LoanContract.Id" />
+            }
+
+            <div class="my-3">
+                <label class="form-label" for="LoanContract_ContractDate">@L("ContractDate")</label>
+                <input class="form-control m-input date-picker" id="LoanContract_ContractDate" type="text" name="contractDate" value="@Model.LoanContract.ContractDate" />
+            </div>
+
+            <div class="my-3">
+                <label class="form-label" for="LoanContract_Amount">@L("Amount")</label>
+                <input class="form-control m-input" id="LoanContract_Amount" value="@Model.LoanContract.Amount.ToString(CultureInfo.InvariantCulture)" type="number" name="amount" />
+            </div>
+
+            <div class="my-3">
+                <label class="form-label" for="LoanContract_Summery">@L("Summery")</label>
+                <input class="form-control" id="LoanContract_Summery" value="@Model.LoanContract.Summery" type="text" name="summery" required />
+            </div>
+
+            <div class="my-3">
+                <label class="form-label" for="BorrowerId">@L("Borrower")</label>
+                <select class="form-select select2" name="borrowerId" id="BorrowerId">
+                    <option value="">@L("SelectBorrower")</option>
+                    @foreach (var person in Model.PersonList)
+                    {
+                        <option value="@person.Id" selected="@(Model.LoanContract.BorrowerId == person.Id)">@person.FirstName @person.LastName</option>
+                    }
+                </select>
+            </div>
+
+            <div class="my-3">
+                <label class="form-label" for="GuarantorIds">@L("Guarantors")</label>
+                <select class="form-select select2" name="guarantorIds" id="GuarantorIds" multiple>
+                    @foreach (var person in Model.PersonList)
+                    {
+                        <option value="@person.Id" selected="@(Model.LoanContract.GuarantorIds != null && Model.LoanContract.GuarantorIds.Contains(person.Id))">@person.FirstName @person.LastName</option>
+                    }
+                </select>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

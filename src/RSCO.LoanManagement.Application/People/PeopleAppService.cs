@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using Abp.Linq.Extensions;
@@ -156,6 +156,18 @@ namespace RSCO.LoanManagement.People
             var personListDtos = await query.ToListAsync();
 
             return _peopleExcelExporter.ExportToFile(personListDtos);
+        }
+
+        public async Task<List<PersonDto>> GetAllPeopleForTableDropdown()
+        {
+            return await _personRepository.GetAll()
+                .Select(person => new PersonDto
+                {
+                    Id = person.Id,
+                    FirstName = person.FirstName,
+                    LastName = person.LastName
+                })
+                .ToListAsync();
         }
 
     }

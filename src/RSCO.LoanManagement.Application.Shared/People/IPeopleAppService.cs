@@ -21,5 +21,7 @@ namespace RSCO.LoanManagement.People
 
         Task<FileDto> GetPeopleToExcel(GetAllPeopleForExcelInput input);
 
+        Task<System.Collections.Generic.List<PersonDto>> GetAllPeopleForTableDropdown();
+
     }
 }

@@ -1,4 +1,4 @@
-﻿using Abp.OpenIddict.Applications;
+using Abp.OpenIddict.Applications;
 using Abp.OpenIddict.Authorizations;
 using Abp.OpenIddict.EntityFrameworkCore;
 using Abp.OpenIddict.Scopes;
@@ -84,31 +84,20 @@ namespace RSCO.LoanManagement.EntityFrameworkCore
             });
 
 
-            modelBuilder.Entity<Person>(builder =>
-            {
-                builder.HasMany(p => p.LoanContracts)
-            .WithOne(lcp => lcp.PersonFk)
-            .HasForeignKey(lcp => lcp.PersonId);
-            });
-
             modelBuilder.Entity<LoanContract>(builder =>
             {
                 builder.HasMany(lc => lc.Persons)
-            .WithOne(lcp => lcp.LoanContractFk)
-            .HasForeignKey(lcp => lcp.LoanContractId);
+                       .WithOne(lcp => lcp.LoanContract)
+                       .HasForeignKey(lcp => lcp.LoanContractId)
+                       .OnDelete(DeleteBehavior.Cascade);
             });
 
             modelBuilder.Entity<LoanContractPerson>(builder =>
             {
-                builder.HasOne(lcp => lcp.LoanContractFk)
-                       .WithMany(lc => lc.Persons)
-                       .HasForeignKey(lcp => lcp.LoanContractId)
-                       .OnDelete(DeleteBehavior.Cascade);
-
-                builder.HasOne(lcp => lcp.PersonFk)
-                    .WithMany(p => p.LoanContracts)
-                    .HasForeignKey(lcp => lcp.PersonId)
-                    .OnDelete(DeleteBehavior.Cascade);
+                builder.HasOne(lcp => lcp.Person)
+                       .WithMany(p => p.LoanContracts) 
+                       .HasForeignKey(lcp => lcp.PersonId)
+                       .OnDelete(DeleteBehavior.Restrict); 
             });
 
 

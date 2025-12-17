@@ -1,0 +1,38 @@
+
+@using RSCO.LoanManagement.Web.Areas.App.Models.Common.Modals
+@using RSCO.LoanManagement.Web.Areas.App.Models.LoanContracts
+@model LoanContractViewModel
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("Details")))
+
+<div class="modal-body">
+    <div id="LoanContractInformationsTab">
+
+        <div class="row">
+            <div class="col-6 mb-3">
+                <h6>@L("ContractDate") :</h6>
+                @Model.LoanContract.ContractDate
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Amount") :</h6>
+                @Model.LoanContract.Amount
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Summery") :</h6>
+                @Model.LoanContract.Summery
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Borrower") :</h6>
+                @Model.BorrowerName
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Guarantors") :</h6>
+                @Model.GuarantorNames
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalFooterWithClose.cshtml")

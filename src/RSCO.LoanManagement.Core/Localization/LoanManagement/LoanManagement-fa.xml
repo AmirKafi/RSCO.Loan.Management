@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <localizationDictionary culture="fa">
     <texts>
     <text name="HomePage">صفحه اصلی</text>
@@ -1317,5 +1317,17 @@
 		<text name="People">اشخاص</text>
 		<text name="PeopleHeaderInfo">افزودن شخص برای اطلاعات قرارداد وام</text>
 		<text name="CreateNewPerson">افزودن شخص جدید</text>
-    </texts>
+      <text name="Borrower">وام گیرنده</text>
+    <text name="Guarantors">ضامن ها</text>
+    <text name="Guarantor">ضامن</text>
+    <text name="SelectBorrower">انتخاب وام گیرنده</text>
+    <text name="SelectGuarantors">انتخاب ضامن ها</text>
+    <text name="EditLoanContract">ویرایش قرارداد وام</text>
+    <text name="CreateNewLoanContract">ایجاد قرارداد وام جدید</text>
+    <text name="ContractDate">تاریخ قرارداد</text>
+    <text name="Summery">خلاصه</text>
+    <text name="Details">جزئیات</text>
+    <text name="LoanContracts">قراردادهای وام</text>
+    <text name="LoanContractsHeaderInfo">مدیریت قراردادهای وام</text>
+  </texts>
 </localizationDictionary>

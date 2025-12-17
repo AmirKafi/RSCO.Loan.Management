@@ -30,15 +30,15 @@ namespace RSCO.LoanManagement.Authorization
 
             var pages = context.GetPermissionOrNull(AppPermissions.Pages) ?? context.CreatePermission(AppPermissions.Pages, L("Pages"));
 
+            var loanContracts = pages.CreateChildPermission(AppPermissions.Pages_LoanContracts, L("LoanContracts"));
+            loanContracts.CreateChildPermission(AppPermissions.Pages_LoanContracts_Create, L("CreateNewLoanContract"));
+            loanContracts.CreateChildPermission(AppPermissions.Pages_LoanContracts_Edit, L("EditLoanContract"));
+            loanContracts.CreateChildPermission(AppPermissions.Pages_LoanContracts_Delete, L("DeleteLoanContract"));
+
             var loanContractPersons = pages.CreateChildPermission(AppPermissions.Pages_LoanContractPersons, L("LoanContractPersons"), multiTenancySides: MultiTenancySides.Host);
             loanContractPersons.CreateChildPermission(AppPermissions.Pages_LoanContractPersons_Create, L("CreateNewLoanContractPerson"), multiTenancySides: MultiTenancySides.Host);
             loanContractPersons.CreateChildPermission(AppPermissions.Pages_LoanContractPersons_Edit, L("EditLoanContractPerson"), multiTenancySides: MultiTenancySides.Host);
             loanContractPersons.CreateChildPermission(AppPermissions.Pages_LoanContractPersons_Delete, L("DeleteLoanContractPerson"), multiTenancySides: MultiTenancySides.Host);
-
-            var loanContracts = pages.CreateChildPermission(AppPermissions.Pages_LoanContracts, L("LoanContracts"), multiTenancySides: MultiTenancySides.Host);
-            loanContracts.CreateChildPermission(AppPermissions.Pages_LoanContracts_Create, L("CreateNewLoanContract"), multiTenancySides: MultiTenancySides.Host);
-            loanContracts.CreateChildPermission(AppPermissions.Pages_LoanContracts_Edit, L("EditLoanContract"), multiTenancySides: MultiTenancySides.Host);
-            loanContracts.CreateChildPermission(AppPermissions.Pages_LoanContracts_Delete, L("DeleteLoanContract"), multiTenancySides: MultiTenancySides.Host);
 
             var people = pages.CreateChildPermission(AppPermissions.Pages_People, L("People"));
             people.CreateChildPermission(AppPermissions.Pages_People_Create, L("CreateNewPerson"));

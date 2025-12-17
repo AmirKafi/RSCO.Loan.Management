@@ -21,23 +21,6 @@ namespace RSCO.LoanManagement.Tests.LoanContracts
         {
             _loanContractsAppService = Resolve<ILoanContractsAppService>();
             _loanContractTestId = Guid.NewGuid();
-            SeedTestData();
-        }
-
-        private void SeedTestData()
-        {
-            var loanContract = new LoanContract
-            {
-                ContractDate = DateTime.Now,
-                Amount = 0,
-                Summery = "Test value",
-                Id = _loanContractTestId
-            };
-
-            UsingDbContext(context =>
-            {
-                context.LoanContracts.Add(loanContract);
-            });
         }
 
         [Fact]

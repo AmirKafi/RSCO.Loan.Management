@@ -23,7 +23,7 @@ namespace RSCO.LoanManagement.Web.Areas.App.Startup
                     )
                 )
                 .AddItem(new MenuItemDefinition(
-                        AppPageNames.Host.LoanContracts,
+                        AppPageNames.Common.LoanContracts,
                         L("LoanContracts"),
                         url: "App/LoanContracts",
                         icon: "flaticon-more",
@@ -189,12 +189,7 @@ namespace RSCO.LoanManagement.Web.Areas.App.Startup
                         icon: "flaticon-shapes",
                         permissionDependency: new SimplePermissionDependency(AppPermissions.Pages_DemoUiComponents)
                     )
-                ).AddItem(new MenuItemDefinition(
-                    AppPageNames.Loan.People,
-                    L("People"),
-                    url: "App/People",
-                    icon: "flaticon-shapes",
-                    permissionDependency: new SimplePermissionDependency(AppPermissions.Pages_People)));
+                );
         }
 
         private static ILocalizableString L(string name)

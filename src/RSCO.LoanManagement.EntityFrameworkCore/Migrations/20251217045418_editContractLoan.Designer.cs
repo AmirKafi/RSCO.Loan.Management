@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RSCO.LoanManagement.EntityFrameworkCore;
 
@@ -11,9 +12,11 @@ using RSCO.LoanManagement.EntityFrameworkCore;
 namespace RSCO.LoanManagement.Migrations
 {
     [DbContext(typeof(LoanManagementDbContext))]
-    partial class LoanManagementDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251217045418_editContractLoan")]
+    partial class editContractLoan
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -2090,19 +2093,11 @@ namespace RSCO.LoanManagement.Migrations
                     b.Property<Guid>("PersonId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("PersonId1")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("Role")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("LoanContractId");
 
                     b.HasIndex("PersonId");
-
-                    b.HasIndex("PersonId1");
 
                     b.ToTable("LoanContractPersons");
                 });
@@ -2732,21 +2727,21 @@ namespace RSCO.LoanManagement.Migrations
 
             modelBuilder.Entity("RSCO.LoanManagement.LoanContractPersons.LoanContractPerson", b =>
                 {
-                    b.HasOne("RSCO.LoanManagement.LoanContracts.LoanContract", null)
+                    b.HasOne("RSCO.LoanManagement.LoanContracts.LoanContract", "LoanContractFk")
                         .WithMany("Persons")
                         .HasForeignKey("LoanContractId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("RSCO.LoanManagement.People.Person", null)
-                        .WithMany()
+                    b.HasOne("RSCO.LoanManagement.People.Person", "PersonFk")
+                        .WithMany("LoanContracts")
                         .HasForeignKey("PersonId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("RSCO.LoanManagement.People.Person", null)
-                        .WithMany("LoanContracts")
-                        .HasForeignKey("PersonId1");
+                    b.Navigation("LoanContractFk");
+
+                    b.Navigation("PersonFk");
                 });
 
             modelBuilder.Entity("RSCO.LoanManagement.MultiTenancy.Payments.SubscriptionPaymentProduct", b =>

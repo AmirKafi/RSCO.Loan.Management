@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <localizationDictionary culture="en">
   <texts>
     <text name="HomePage">Home page</text>
@@ -1318,5 +1318,17 @@
 	  <text name="PeopleHeaderInfo">Creating People to be used in Loan Contracts</text>
 	  <text name="CreateNewPerson">Create New Person</text>
 	  
+    <text name="Borrower">Borrower</text>
+    <text name="Guarantors">Guarantors</text>
+    <text name="Guarantor">Guarantor</text>
+    <text name="SelectBorrower">Select Borrower</text>
+    <text name="SelectGuarantors">Select Guarantors</text>
+    <text name="EditLoanContract">Edit Loan Contract</text>
+    <text name="CreateNewLoanContract">Create New Loan Contract</text>
+    <text name="ContractDate">Contract Date</text>
+    <text name="Summery">Summary</text>
+    <text name="Details">Details</text>
+    <text name="LoanContracts">Loan Contracts</text>
+    <text name="LoanContractsHeaderInfo">Manage loan contracts</text>
   </texts>
 </localizationDictionary>
