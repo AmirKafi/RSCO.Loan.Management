@@ -8,11 +8,11 @@ namespace RSCO.LoanManagement.People.Dtos
     {
 
         [Required]
-        [StringLength(PersonConsts.MaxFirstNameLength, MinimumLength = PersonConsts.MinFirstNameLength)]
+        [StringLength(PersonConsts.MaxFirstNameLength)]
         public string FirstName { get; set; }
 
         [Required]
-        [StringLength(PersonConsts.MaxLastNameLength, MinimumLength = PersonConsts.MinLastNameLength)]
+        [StringLength(PersonConsts.MaxLastNameLength)]
         public string LastName { get; set; }
 
     }

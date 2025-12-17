@@ -1,4 +1,8 @@
-﻿using RSCO.LoanManagement.People.Dtos;
+﻿using RSCO.LoanManagement.LoanContractPersons.Dtos;
+using RSCO.LoanManagement.LoanContractPersons;
+using RSCO.LoanManagement.LoanContracts.Dtos;
+using RSCO.LoanManagement.LoanContracts;
+using RSCO.LoanManagement.People.Dtos;
 using RSCO.LoanManagement.People;
 using Abp.Application.Editions;
 using Abp.Application.Features;
@@ -53,6 +57,10 @@ namespace RSCO.LoanManagement
     {
         public static void CreateMappings(IMapperConfigurationExpression configuration)
         {
+            configuration.CreateMap<CreateOrEditLoanContractPersonDto, LoanContractPerson>().ReverseMap();
+            configuration.CreateMap<LoanContractPersonDto, LoanContractPerson>().ReverseMap();
+            configuration.CreateMap<CreateOrEditLoanContractDto, LoanContract>().ReverseMap();
+            configuration.CreateMap<LoanContractDto, LoanContract>().ReverseMap();
             configuration.CreateMap<CreateOrEditPersonDto, Person>().ReverseMap();
             configuration.CreateMap<PersonDto, Person>().ReverseMap();
             //Inputs

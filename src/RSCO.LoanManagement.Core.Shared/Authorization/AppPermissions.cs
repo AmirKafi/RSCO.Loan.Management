@@ -6,6 +6,16 @@
     /// </summary>
     public static class AppPermissions
     {
+        public const string Pages_LoanContractPersons = "Pages.LoanContractPersons";
+        public const string Pages_LoanContractPersons_Create = "Pages.LoanContractPersons.Create";
+        public const string Pages_LoanContractPersons_Edit = "Pages.LoanContractPersons.Edit";
+        public const string Pages_LoanContractPersons_Delete = "Pages.LoanContractPersons.Delete";
+
+        public const string Pages_LoanContracts = "Pages.LoanContracts";
+        public const string Pages_LoanContracts_Create = "Pages.LoanContracts.Create";
+        public const string Pages_LoanContracts_Edit = "Pages.LoanContracts.Edit";
+        public const string Pages_LoanContracts_Delete = "Pages.LoanContracts.Delete";
+
         public const string Pages_People = "Pages.People";
         public const string Pages_People_Create = "Pages.People.Create";
         public const string Pages_People_Edit = "Pages.People.Edit";

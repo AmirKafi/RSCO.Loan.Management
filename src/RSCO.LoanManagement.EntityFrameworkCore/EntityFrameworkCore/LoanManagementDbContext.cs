@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Text.Json;
-using Abp.OpenIddict.Applications;
+﻿using Abp.OpenIddict.Applications;
 using Abp.OpenIddict.Authorizations;
 using Abp.OpenIddict.EntityFrameworkCore;
 using Abp.OpenIddict.Scopes;
@@ -14,11 +12,15 @@ using RSCO.LoanManagement.Chat;
 using RSCO.LoanManagement.Editions;
 using RSCO.LoanManagement.ExtraProperties;
 using RSCO.LoanManagement.Friendships;
+using RSCO.LoanManagement.LoanContractPersons;
+using RSCO.LoanManagement.LoanContracts;
 using RSCO.LoanManagement.MultiTenancy;
 using RSCO.LoanManagement.MultiTenancy.Accounting;
 using RSCO.LoanManagement.MultiTenancy.Payments;
 using RSCO.LoanManagement.People;
 using RSCO.LoanManagement.Storage;
+using System.Collections.Generic;
+using System.Text.Json;
 
 namespace RSCO.LoanManagement.EntityFrameworkCore
 {
@@ -27,13 +29,13 @@ namespace RSCO.LoanManagement.EntityFrameworkCore
         /* Define an IDbSet for each entity of the application */
 
         public virtual DbSet<OpenIddictApplication> Applications { get; }
-        
+
         public virtual DbSet<OpenIddictAuthorization> Authorizations { get; }
-        
+
         public virtual DbSet<OpenIddictScope> Scopes { get; }
-        
+
         public virtual DbSet<OpenIddictToken> Tokens { get; }
-        
+
         public virtual DbSet<BinaryObject> BinaryObjects { get; set; }
 
         public virtual DbSet<Friendship> Friendships { get; set; }
@@ -43,7 +45,7 @@ namespace RSCO.LoanManagement.EntityFrameworkCore
         public virtual DbSet<SubscribableEdition> SubscribableEditions { get; set; }
 
         public virtual DbSet<SubscriptionPayment> SubscriptionPayments { get; set; }
-        
+
         public virtual DbSet<SubscriptionPaymentProduct> SubscriptionPaymentProducts { get; set; }
 
         public virtual DbSet<Invoice> Invoices { get; set; }
@@ -52,6 +54,8 @@ namespace RSCO.LoanManagement.EntityFrameworkCore
 
         public virtual DbSet<RecentPassword> RecentPasswords { get; set; }
         public virtual DbSet<Person> People { get; set; }
+        public virtual DbSet<LoanContractPerson> LoanContractPersons { get; set; }
+        public virtual DbSet<LoanContract> LoanContracts { get; set; }
 
         public LoanManagementDbContext(DbContextOptions<LoanManagementDbContext> options)
             : base(options)
@@ -78,7 +82,36 @@ namespace RSCO.LoanManagement.EntityFrameworkCore
                         })
                     );
             });
-            
+
+
+            modelBuilder.Entity<Person>(builder =>
+            {
+                builder.HasMany(p => p.LoanContracts)
+            .WithOne(lcp => lcp.PersonFk)
+            .HasForeignKey(lcp => lcp.PersonId);
+            });
+
+            modelBuilder.Entity<LoanContract>(builder =>
+            {
+                builder.HasMany(lc => lc.Persons)
+            .WithOne(lcp => lcp.LoanContractFk)
+            .HasForeignKey(lcp => lcp.LoanContractId);
+            });
+
+            modelBuilder.Entity<LoanContractPerson>(builder =>
+            {
+                builder.HasOne(lcp => lcp.LoanContractFk)
+                       .WithMany(lc => lc.Persons)
+                       .HasForeignKey(lcp => lcp.LoanContractId)
+                       .OnDelete(DeleteBehavior.Cascade);
+
+                builder.HasOne(lcp => lcp.PersonFk)
+                    .WithMany(p => p.LoanContracts)
+                    .HasForeignKey(lcp => lcp.PersonId)
+                    .OnDelete(DeleteBehavior.Cascade);
+            });
+
+
             modelBuilder.Entity<SubscriptionPaymentProduct>(x =>
             {
                 x.Property(u => u.ExtraProperties)
@@ -127,7 +160,7 @@ namespace RSCO.LoanManagement.EntityFrameworkCore
                 b.HasIndex(e => new { e.TenantId, e.SourceUserId });
                 b.HasIndex(e => new { e.TenantId, e.TargetUserId });
             });
-            
+
             modelBuilder.ConfigureOpenIddict();
         }
     }
