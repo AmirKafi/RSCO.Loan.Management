@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using Abp.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -61,13 +61,13 @@ namespace RSCO.LoanManagement.Web.Areas.App.Controllers
 
         public async Task<ActionResult> ViewPerson(Guid id)
         {
-            var getPersonForViewDto = await _peopleAppService.GetPersonForView(id);
-
+            var dto = await _peopleAppService.GetPersonForView(id);
             var model = new PersonViewModel()
             {
-                Person = getPersonForViewDto.Person
+                Person = dto.Person,
+                BorrowerLoanContracts = dto.BorrowerLoanContracts,
+                GuarantorLoanContracts = dto.GuarantorLoanContracts
             };
-
             return View(model);
         }
 

@@ -15,6 +15,8 @@ using Abp.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Abp.UI;
 using RSCO.LoanManagement.Storage;
+using RSCO.LoanManagement.LoanContractPersons;
+using RSCO.LoanManagement.LoanContracts.Dtos;
 
 namespace RSCO.LoanManagement.People
 {
@@ -23,11 +25,13 @@ namespace RSCO.LoanManagement.People
     {
         private readonly IRepository<Person, Guid> _personRepository;
         private readonly IPeopleExcelExporter _peopleExcelExporter;
+        private readonly IRepository<LoanContractPerson, Guid> _loanContractPersonRepository;
 
-        public PeopleAppService(IRepository<Person, Guid> personRepository, IPeopleExcelExporter peopleExcelExporter)
+        public PeopleAppService(IRepository<Person, Guid> personRepository, IPeopleExcelExporter peopleExcelExporter, IRepository<LoanContractPerson, Guid> loanContractPersonRepository)
         {
             _personRepository = personRepository;
             _peopleExcelExporter = peopleExcelExporter;
+            _loanContractPersonRepository = loanContractPersonRepository;
 
         }
 
@@ -85,6 +89,35 @@ namespace RSCO.LoanManagement.People
             var person = await _personRepository.GetAsync(id);
 
             var output = new GetPersonForViewDto { Person = ObjectMapper.Map<PersonDto>(person) };
+
+            var relations = await _loanContractPersonRepository.GetAll()
+                .Include(x => x.LoanContract)
+                .Where(x => x.PersonId == id)
+                .ToListAsync();
+
+            output.BorrowerLoanContracts = relations
+                .Where(x => x.Role == LoanContractPersonRole.Borrower && x.LoanContract != null)
+                .Select(x => new LoanContractDto
+                {
+                    Id = x.LoanContractId,
+                    ContractDate = x.LoanContract.ContractDate,
+                    Amount = x.LoanContract.Amount,
+                    Summery = x.LoanContract.Summery
+                })
+                .OrderByDescending(lc => lc.ContractDate)
+                .ToList();
+
+            output.GuarantorLoanContracts = relations
+                .Where(x => x.Role == LoanContractPersonRole.Guarantor && x.LoanContract != null)
+                .Select(x => new LoanContractDto
+                {
+                    Id = x.LoanContractId,
+                    ContractDate = x.LoanContract.ContractDate,
+                    Amount = x.LoanContract.Amount,
+                    Summery = x.LoanContract.Summery
+                })
+                .OrderByDescending(lc => lc.ContractDate)
+                .ToList();
 
             return output;
         }

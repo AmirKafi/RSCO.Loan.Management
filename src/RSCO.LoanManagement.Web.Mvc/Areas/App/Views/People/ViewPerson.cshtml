@@ -1,4 +1,4 @@
-﻿@using RSCO.LoanManagement.Web.Areas.App.Startup
+@using RSCO.LoanManagement.Web.Areas.App.Startup
 @using RSCO.LoanManagement.Web.Areas.App.Models.People
 @model PersonViewModel
 @using RSCO.LoanManagement.Web.TagHelpers
@@ -34,6 +34,60 @@ var breadcrumbs = new List<BreadcrumbItem>()
                             @Model.Person.LastName
                         </div>
 
+                    </div>
+                    
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <h5 class="mb-3">@L("Borrower")</h5>
+                            <div class="row">
+                                @if (Model.BorrowerLoanContracts != null && Model.BorrowerLoanContracts.Any())
+                                {
+                                    foreach (var lc in Model.BorrowerLoanContracts)
+                                    {
+                                        <div class="col-md-6 col-lg-4 mb-3">
+                                            <div class="card h-100">
+                                                <div class="card-body">
+                                                    <div class="fw-bold">@L("ContractDate"): @lc.ContractDate.ToString("d")</div>
+                                                    <div class="text-muted">@L("Amount"): @lc.Amount</div>
+                                                    <div class="mt-2">@lc.Summery</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <div class="col-12 text-muted">—</div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <h5 class="mb-3">@L("Guarantors")</h5>
+                            <div class="row">
+                                @if (Model.GuarantorLoanContracts != null && Model.GuarantorLoanContracts.Any())
+                                {
+                                    foreach (var lc in Model.GuarantorLoanContracts)
+                                    {
+                                        <div class="col-md-6 col-lg-4 mb-3">
+                                            <div class="card h-100">
+                                                <div class="card-body">
+                                                    <div class="fw-bold">@L("ContractDate"): @lc.ContractDate.ToString("d")</div>
+                                                    <div class="text-muted">@L("Amount"): @lc.Amount</div>
+                                                    <div class="mt-2">@lc.Summery</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <div class="col-12 text-muted">—</div>
+                                }
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
